@@ -89,7 +89,7 @@ def get_completion_and_token_count(messages,
 
 
 
-def get_score_and_rationale_using_gpt(statement, leader_type, leader_type_description, temp=TEMP0):
+def get_score_and_rationale_using_gpt(statement, group_type, group_type_description, temp=TEMP0):
     """
     Simulate how a particular group type would evaluate a single statement from one of the 88 statements in  
     the pf Survey, based on the definition for this particular group type. The statement
@@ -252,9 +252,9 @@ def simulate_group_type_responses(experiment_num, num_simulations):
                 group_type_description = split_line[1]
             
                 for i in range(1, num_simulations + 1):
-                    group_type_plus = leader_type + " S" + str(i)
+                    group_type_plus = group_type + " S" + str(i)
                     print(f'{group_type_plus}   Total Simulations Count: {group_type_count} ')
-                    logging.info(f'{grouptype_plus}   Total Simulations Count: {group_type_count} ')
+                    logging.info(f'{group_type_plus}   Total Simulations Count: {group_type_count} ')
                     group_type_count += 1
                     
                     if os.path.exists('results.txt'):
@@ -364,7 +364,7 @@ def get_args():
 def main():
     args = get_args()
     setup_logging(args.ex_num)
-    simulate_leadership_type_responses(args.ex_num, args.sims)
+    simulate_group_type_responses(args.ex_num, args.sims)
 
     input_folder_name = f'data/E{args.ex_num}_pf_simulated_responses_raw'
     output_folder_name = f'data/E{args.ex_num}_PF_Simulated_Responses'
