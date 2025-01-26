@@ -1,17 +1,20 @@
 # PFSimulations
 #### <u>Description</u>
 
-Given 12 defined 'Group Types',  create simulations of how a member of each 'Group Type' would rate each of  88 Survey Statements.
+Given a distinct number of defined 'Group Types',  create simulations of how members of a particular 'Group Type' would rate each of  the 'Statements' in the survey.
 
+#### <u>Definitions:</u>
 
+`num_gts` => the number of group types
+`num_ss` => the number of statements in the Survey.
 
 ####  <u>Context</u>
 
-A user is given a survey comprised of 88 statements.  The user rates their level of agreement for each statement on a scale of -100 to +100 where -100 indicates complete disagreement and +100 indicates total alignment.  Heuristics have been developed to take an individual's rating of these 88 statements and then classify them into 1 of 12 groups.
+A user is given a survey comprised of `num_ss` 'Statements'.  The user rates their level of agreement for each 'Statement' on a scale of -100 to +100 where -100 indicates complete disagreement and +100 indicates total alignment.  Heuristics have been developed to take an individual's rating of these `num_ss` statements and then classify them into one of the defined group types.
 
-To test to see how well the heuristic works, we create simulations (using the OpenAI Completion API) of how a potential user from a given group would probably rate these 88 statements.  We then take the simulated survey responses, run the heuristic on these simulated ratings and check to see if the heuristic actually identifies the correct group from which we used to produce the simulated ratings.
+To test to see how well the heuristic works, we create simulations (using the OpenAI Completion API) of how a potential user from a given group would probably rate each of these 'Statements'.  We then take the simulated survey responses, run the heuristic on these simulated ratings and check to see if the heuristic actually identifies the correct group from which we used to produce the simulated ratings.
 
-NOTE:  Since this is work that I am developing as a consultant for a private company, and this repo is a public repository I purposely omit in the README and python code,  details as to the particular 'group' types as well as the specific survey questions.
+NOTE:  Since this is work that I am developing as a consultant for a private company, and this repo is a public repository I purposely omit in the README and python code,  details as to the particular 'group' types as well as the specifics of the survey questions.
 
 
 
@@ -24,14 +27,14 @@ NOTE:  Since this is work that I am developing as a consultant for a private com
 
 #### <u>Outputs</u>
 
-- Folder 'data/E\<Experiment Number\>_PF_Simulated_Responses/' ... containing 12 x \<Number of Simulations\>   .xlsx files.
-  - Each file contains 89 rows (one row for the column headers ) and 88 rows   ... one for each one of the 88 Survey Statements
+- Folder 'data/E\<Experiment Number\>_PF_Simulated_Responses/' ... containing `num_gts` x \<Number of Simulations\>   .xlsx files.
+  - Each file contains `num_ss + 1` rows (one row for the column headers ) and `num_ss` rows   ... one for each one of the `num_ss` Survey Statements
   - Each file has 3 columns
     - Statement
     - Rating
     - Rationale
-- Folder 'txt_files/E\<Experiment Number\>/'  containing 12 x \<Number of Simulations\>  .txt files.
-  - Each .txt file contains 88 lines, where each line is a '|' delimited string composed using the values of 'rating' and 'explanation' coming from the OpenAI Completion API
+- Folder 'txt_files/E\<Experiment Number\>/'  containing  `num_gts` number of group types x \<Number of Simulations\>  .txt files.
+  - Each .txt file contains `num_ss` lines, where each line is a '|' delimited string composed using the values of 'rating' and 'explanation' coming from the OpenAI Completion API
 - Log file 'E\<Experiment Number\>_pf_survey_simulated_responses.log'
 
 
