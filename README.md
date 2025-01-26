@@ -6,7 +6,8 @@ Given a distinct number of defined 'Group Types',  create simulations of how mem
 #### <u>Definitions:</u>
 
 `num_gts` => the number of group types
-`num_ss` => the number of statements in the Survey.
+
+`num_ss` => the number of statements in the Survey
 
 ####  <u>Context</u>
 
